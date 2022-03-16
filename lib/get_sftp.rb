@@ -33,7 +33,7 @@ class GetSFTP
     logger.info 'connected'
   rescue StandardError => e
     sleep 10
-    retry if (retries += 1) < 1
+    retry if (retries += 1) < 4 
     logger.info "Could not connect to remote server #{e}. Tried to connect #{retries} time(s)"
   end
 
