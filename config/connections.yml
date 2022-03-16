@@ -1,0 +1,4 @@
+gobi:
+ host: ENV["GOBI_HOST"]
+ user: ENV["GOBI_USER"]
+ password: ENV["GOBI_PASS"]

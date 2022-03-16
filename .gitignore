@@ -1,0 +1,11 @@
+# Convoluted gitkeep setting to keep the data directory
+# structure intact without tracking its contents.
+
+vendor
+.bundle
+
+data/*
+!data/.keep
+
+secrets/*
+!secrets/.keep

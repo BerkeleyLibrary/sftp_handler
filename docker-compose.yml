@@ -1,0 +1,10 @@
+services:
+  gobi_sftp:
+    build: .
+    image: containers.lib.berkeley.edu/lap/gobi_sftp/development:latest
+    init: yes
+    volumes:
+      - ./:/opt/app:rw
+      - ./secrets:/run/secrets
+
+version: "3.8"
