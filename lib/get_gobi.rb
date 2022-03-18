@@ -1,4 +1,4 @@
-require_relative 'get_sftp'
+require_relative 'sftp_provider'
 require_relative 'date_tools'
 require 'date'
 require_relative 'logging'
@@ -9,7 +9,7 @@ retrieve_file = "ebook#{file_date}.ord"
 @today_date = Time.now.strftime('%d/%m/%Y')
 REMOTE_DIR = 'gobiord'
 DATA_DIR = File.expand_path(File.join(__dir__, '../data')) 
-retrieve_file = 'ebook0309.ord'
+#retrieve_file = 'ebook0309.ord'
 
 def process_gobi(conn, retrieve_file)
   return unless files = conn.get_dir_entries(REMOTE_DIR)
@@ -24,7 +24,7 @@ def process_gobi(conn, retrieve_file)
 end
 
 # Initialize the ftp connection
-conn = GetSFTP.new('gobi')
+conn = SFTPProvider.new('gobi')
 if conn.connection_open?
   process_gobi(conn, retrieve_file)
 else

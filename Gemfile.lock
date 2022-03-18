@@ -2,6 +2,9 @@ GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.2)
+    cgi (0.3.2)
+    erb (2.2.3)
+      cgi
     net-sftp (3.0.0)
       net-ssh (>= 5.0.0, < 7.0.0)
     net-ssh (6.1.0)
@@ -31,6 +34,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  erb
   net-sftp
   rubocop
   thor (~> 1.1)
