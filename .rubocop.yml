@@ -1,4 +1,5 @@
 AllCops:
+  NewCops: enable
   # Exclude generated files
   Exclude:
     - 'bin/**/*'
@@ -30,7 +31,7 @@ Lint/SuppressedException:
   AllowComments: true
 
 # Reasonable line-length check; it's too easy for the cure to be worse than the disease
-Metrics/LineLength:
+Layout:
   Max: 150
 
 # Confusing and weird

@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative '../config/initializers/ftp_configs.rb'
+#require_relative '../config/initializers/ftp_configs.rb'
 locallib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(locallib) unless $LOAD_PATH.include?(locallib)
+require 'get_gobi'
 
-
+GetGobi.get_gobi

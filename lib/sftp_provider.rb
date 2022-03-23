@@ -14,17 +14,17 @@ class SFTPProvider
   Docker::Secret.setup_environment!
   CONFIG = YAML.safe_load(ERB.new(File.read("#{config_path}/connections.yml")).result)
 
-  def initialize(site)
+  # def initialize(site)
+  def initialize(host, user, password)
     retries = 0
     logger.info "trying to connect to #{ENV['GOBI_HOST']} ftp server"
     # rubocop:disable Lint/UselessAssignment
     @sftp = Net::SFTP.start(
-      CONFIG[site]['host'],
-      CONFIG[site]['user'],
-      { password: CONFIG[site]['password'], port: 22, append_all_supported_algorithms: true },
+      host,
+      user,
+      { password: password, port: 22, append_all_supported_algorithms: true },
       sftp_options = { version: 3 }
     )
-
     # rubocop:enable Lint/UselessAssignment
     logger.info 'connected'
   rescue StandardError => e
@@ -49,6 +49,5 @@ class SFTPProvider
     @sftp.dir.entries(dir)
   rescue Net::SFTP::StatusException => e
     logger.info "Directory #{dir} not found on remote server #{e}"
-    return nil
   end
 end

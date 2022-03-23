@@ -18,5 +18,5 @@ RUN bundle install --system
 COPY --chown=alma . .
 
 USER alma
-ENTRYPOINT ["bundle","exec","ruby","/opt/app/lib/get_gobi.rb"]
+ENTRYPOINT ["ruby","/opt/app/lib/get_gobi.rb"]
 #CMD ["help"]
