@@ -7,5 +7,13 @@ vendor
 data/*
 !data/.keep
 
+# Build/test artifacts
+artifacts/*
+!/artifacts/.keep
+!artifacts/rspec
+!artifacts/rubocop
+artifacts/rubocop/*
+!/artifacts/rubocop/.keep
+
 secrets/*
 !secrets/.keep
