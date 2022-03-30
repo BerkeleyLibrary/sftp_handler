@@ -1,27 +1,54 @@
 # spec/sftp_provider_spec.rb
 require 'sftp_provider'
 require 'spec_helper'
+require 'sftp_helper'
 
+describe SFTPProvider do
 
-describe SFTPProvider do 
-  let(:sftp_config) { {:append_all_supported_algorithms=>true, :password=>"pass", :port=>22} }
-  #let(:sftp_config) { {password: 'pass', port: 22, append_all_supported_algorithms: true} }
-  let(:dir_double) { double(:dir, entries: ['file-one.txt', 'file-two.txt']) }
-  let(:sftp_double) { double(:sftp, download!: true, dir: dir_double) }
-  let(:ssh_double) { double(:ssh, sftp: sftp_double) }
-  let(:local_file) { 'some-local-file.txt' }
-  let(:remote_file) { 'some-remote-file.txt' }
-  subject { SFTPProvider.new('host', 'user', 'pass') }
+  before do
+    @sftp = instance_double(Net::SFTP::Session)
+    pass = { password: 'password', port: 22, append_all_supported_algorithms: true }
 
-  def stub_connection_and_ensure(message, input_file, output_file)
-    expect(Net::SSH).to receive(:start).with('host', 'user', sftp_config).and_yield(ssh_double)
-    expect(sftp_double).to receive(message).with(input_file, output_file)
+    # rubocop:disable Lint/UselessAssignment
+    allow(Net::SFTP).to receive(:start).with('host', 'user', pass, sftp_options = { version: 3 }).and_return(@sftp)
+    # rubocop:enable Lint/UselessAssignment
+
   end
 
-  describe 'download_file' do
-    it 'downloads a remote file to a local file via ssh' do
-      stub_connection_and_ensure(:download!, remote_file, local_file)
-      subject.download_file(remote_file, local_file)
+  describe 'get_dir_entries' do
+    before do
+      @dir = instance_double(Net::SFTP::Operations::Dir)
+    end
+
+    it 'makes sure sftp mock can call dir method' do
+      expect(@sftp).to receive(:dir).and_return(@dir)
+      @sftp.dir
+    end
+
+    it 'receives and returns dir' do
+      results = %w[one two]
+      allow(Net::SFTP::Operations::Dir).to receive(:entries).with('test_dir').and_return(@dir)
+      # allow(@dir).to receive(:entries).with('test_dir').and_return(results)
+      #      allow(@dir).to receive(:entries).with('test_dir').and_return(nil)
+      expect(@dir).to receive(:entries).with('test_dir').and_return(results)
+      # expect SFTPProvider.new('host', 'user', 'password').get_dir_entries('test_dir').to eql(['one','two'])
+      # SFTPProvider.new('host', 'user', 'password').get_dir_entries('test_dir').to be(nil)
+      testy = SFTPProvider.new('host', 'user', 'password')
+      expect(testy.get_dir_entries('test_dir')).to be(nil)
+    end
+
+  end
+
+  describe 'download_files' do
+    it 'downloads a remote file to a local file' do
+      expect(@sftp).to receive(:download!).with('remote_file', 'local_file')
+      SFTPProvider.new('host', 'user', 'password').download_file('remote_file', 'local_file')
+    end
+
+    it 'throws an exception if the file is not found' do
+      allow(@sftp).to receive(:download!).with('remote_file', 'local_file').and_raise(Net::SFTP::StatusException)
+      expect(@sftp).to receive(:download!).with('remote_file', 'local_file').and_raise(Net::SFTP::StatusException)
     end
   end
+
 end

@@ -15,6 +15,7 @@ class SFTPProvider
   CONFIG = YAML.safe_load(ERB.new(File.read("#{config_path}/connections.yml")).result)
 
   # def initialize(site)
+  # rubocop:disable Metrics/MethodLength
   def initialize(host, user, password)
     retries = 0
     logger.info "trying to connect to #{ENV['GOBI_HOST']} ftp server"
@@ -32,6 +33,7 @@ class SFTPProvider
     retry if (retries += 1) < 4
     logger.info "Could not connect to remote server #{e}. Tried to connect #{retries} time(s)"
   end
+  # rubocop:enable Metrics/MethodLength
 
   def connection_open?
     return true if defined?(@sftp)
