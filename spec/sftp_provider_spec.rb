@@ -26,7 +26,7 @@ describe SFTPProvider do
 
     it 'returns an array of a directories contents' do
       mock_result = %w[one two]
-      expect(@dir).to receive(:entries).with('test_dir').and_return(mock_result)
+      allow(@dir).to receive(:entries).with('test_dir').and_return(mock_result)
       expect(SFTPProvider.new('host', 'user', 'password').get_dir_entries('test_dir')).to be_an_instance_of(Array)
     end
 
