@@ -23,6 +23,13 @@ describe SFTPProvider do
       expect(@sftp).to receive(:dir).and_return(@dir)
       @sftp.dir
     end
+
+    it 'returns an array of a directories contents' do
+      mock_result = ['one','two']
+      expect(@dir).to receive(:entries).with('test_dir').and_return(mock_result)
+      expect(SFTPProvider.new('host', 'user', 'password').get_dir_entries('test_dir')).to be_an_instance_of(Array) 
+    end
+
   end
 
   describe 'download_files' do

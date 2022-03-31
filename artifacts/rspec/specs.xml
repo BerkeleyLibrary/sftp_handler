@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="rspec" tests="2" skipped="0" failures="0" errors="0" time="0.009880" timestamp="2022-03-30T21:14:22+00:00" hostname="fa496f7b13a9">
+<testsuite name="rspec" tests="3" skipped="0" failures="1" errors="0" time="0.009892" timestamp="2022-03-31T17:00:56+00:00" hostname="cf7734599c02">
 <properties>
-<property name="seed" value="45949"/>
+<property name="seed" value="10543"/>
 </properties>
-<testcase classname="spec.sftp_provider_spec" name="SFTPProvider get_dir_entries makes sure sftp mock can call dir method" file="./spec/sftp_provider_spec.rb" time="0.005691"></testcase>
-<testcase classname="spec.sftp_provider_spec" name="SFTPProvider download_files downloads a remote file to a local file" file="./spec/sftp_provider_spec.rb" time="0.000719"></testcase>
+<testcase classname="spec.sftp_provider_spec" name="SFTPProvider get_dir_entries makes sure sftp mock can call dir method" file="./spec/sftp_provider_spec.rb" time="0.005727"></testcase>
+<testcase classname="spec.sftp_provider_spec" name="SFTPProvider get_dir_entries returns an array of a directories contents" file="./spec/sftp_provider_spec.rb" time="0.000686"><failure message="#&lt;InstanceDouble(Net::SFTP::Session) (anonymous)&gt; received unexpected message :dir with (no args)" type="RSpec::Mocks::MockExpectationError">Failure/Error: @sftp.dir.entries(dir)
+  #&lt;InstanceDouble(Net::SFTP::Session) (anonymous)&gt; received unexpected message :dir with (no args)
+./lib/sftp_provider.rb:51:in `get_dir_entries&apos;
+./spec/sftp_provider_spec.rb:30:in `block (3 levels) in &lt;top (required)&gt;&apos;
+./spec/spec_helper.rb:18:in `block (2 levels) in &lt;top (required)&gt;&apos;
+/usr/local/bundle/gems/webmock-3.14.0/lib/webmock/rspec.rb:37:in `block (2 levels) in &lt;top (required)&gt;&apos;</failure></testcase>
+<testcase classname="spec.sftp_provider_spec" name="SFTPProvider download_files downloads a remote file to a local file" file="./spec/sftp_provider_spec.rb" time="0.000520"></testcase>
 </testsuite>
