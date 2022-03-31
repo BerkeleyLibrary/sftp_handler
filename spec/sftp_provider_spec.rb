@@ -17,17 +17,17 @@ describe SFTPProvider do
   describe 'get_dir_entries' do
     before do
       @dir = instance_double(Net::SFTP::Operations::Dir)
+      expect(@sftp).to receive(:dir).and_return(@dir)
     end
 
     it 'makes sure sftp mock can call dir method' do
-      expect(@sftp).to receive(:dir).and_return(@dir)
       @sftp.dir
     end
 
     it 'returns an array of a directories contents' do
       mock_result = %w[one two]
       allow(@dir).to receive(:entries).with('test_dir').and_return(mock_result)
-      expect(SFTPProvider.new('host', 'user', 'password').get_dir_entries('test_dir')).to be_an_instance_of(Array)
+      expect(SFTPProvider.new('host', 'user', 'password').get_dir_entries('test_dir')).to eq(mock_result)
     end
 
   end
