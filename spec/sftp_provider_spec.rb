@@ -28,7 +28,7 @@ describe SFTPProvider do
       expect(SFTPProvider.new('host', 'user', 'password').get_dir_entries('test_dir')).to eq(mock_result)
     end
 
-    it 'returns an exception if directory is not found' do
+    it 'returns an Net::SFTP::StatusException' do
       expect(SFTPProvider.new('host', 'user', 'password').get_dir_entries('test_failure')).to eq(@exception)
     end
 
