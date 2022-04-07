@@ -2,6 +2,7 @@
 require 'sftp_provider'
 require 'spec_helper'
 
+# rubocop:disable Metrics/BlockLength
 describe SFTPProvider do
 
   before do
@@ -42,3 +43,4 @@ describe SFTPProvider do
   end
 
 end
+# rubocop:enable Metrics/BlockLength

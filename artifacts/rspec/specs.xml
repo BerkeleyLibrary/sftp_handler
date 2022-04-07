@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="rspec" tests="3" skipped="0" failures="0" errors="0" time="0.019804" timestamp="2022-03-31T20:36:32+00:00" hostname="c9e41091157c">
+<testsuite name="rspec" tests="3" skipped="0" failures="0" errors="0" time="0.014745" timestamp="2022-04-07T19:05:21+00:00" hostname="33ecb43860c2">
 <properties>
-<property name="seed" value="36983"/>
+<property name="seed" value="41704"/>
 </properties>
-<testcase classname="spec.sftp_provider_spec" name="SFTPProvider get_dir_entries returns an array of a directories contents" file="./spec/sftp_provider_spec.rb" time="0.012380"></testcase>
-<testcase classname="spec.sftp_provider_spec" name="SFTPProvider get_dir_entries returns an exception if directory is not found" file="./spec/sftp_provider_spec.rb" time="0.001425"></testcase>
-<testcase classname="spec.sftp_provider_spec" name="SFTPProvider download_files downloads a remote file to a local file" file="./spec/sftp_provider_spec.rb" time="0.001267"></testcase>
+<testcase classname="spec.sftp_provider_spec" name="SFTPProvider get_dir_entries returns an array of a directories contents" file="./spec/sftp_provider_spec.rb" time="0.009435"></testcase>
+<testcase classname="spec.sftp_provider_spec" name="SFTPProvider get_dir_entries returns an Net::SFTP::StatusException" file="./spec/sftp_provider_spec.rb" time="0.000929"></testcase>
+<testcase classname="spec.sftp_provider_spec" name="SFTPProvider download_files downloads a remote file to a local file" file="./spec/sftp_provider_spec.rb" time="0.000670"></testcase>
 </testsuite>
