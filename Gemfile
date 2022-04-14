@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'colorize'
 gem 'erb'
+gem 'getoptlong'
 gem 'net-sftp'
 gem 'rspec'
 gem 'rspec_junit_formatter'

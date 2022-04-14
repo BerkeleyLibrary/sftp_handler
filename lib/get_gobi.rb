@@ -1,17 +1,32 @@
 require_relative 'sftp_provider'
 require_relative 'date_tools'
 require 'date'
+require 'getoptlong'
 require_relative 'logging'
 require_relative 'ftp_connections'
 
 module Gobi
   include Logging
 
+  @remote_dir = 'gobiord'
+  @out_dir = File.expand_path(File.join(__dir__, '../data'))
+  opts = GetoptLong.new(
+    ['--out_dir', '-o', GetoptLong::REQUIRED_ARGUMENT],
+    ['--remote_dir', '-r', GetoptLong::REQUIRED_ARGUMENT]
+  )
+
+  opts.each do |opt, arg|
+    case opt
+    when '--out_dir'
+      @out_dir = arg
+    when '--remote_dir'
+      @remote_dir = arg
+    end
+  end
+
   file_date = Time.now.strftime('%m%d')
   retrieve_file = ARGV[0] || "ebook#{file_date}.ord"
   @today_date = Time.now.strftime('%d/%m/%Y')
-  REMOTE_DIR = 'gobiord'.freeze
-  DATA_DIR = File.expand_path(File.join(__dir__, '../data'))
 
   CONFIG = FTPConnections.connection
 
@@ -23,14 +38,14 @@ module Gobi
   end
 
   def self.process_gobi(conn, retrieve_file)
-    return unless (files = conn.get_dir_entries(REMOTE_DIR))
+    return unless (files = conn.get_dir_entries(@remote_dir))
 
     files.each do |file|
       next unless file.name.eql? retrieve_file
 
       logger.info "Found file #{retrieve_file} on server going to download"
       date = file.attributes.mtime
-      conn.download_file("#{REMOTE_DIR}/#{retrieve_file}", "#{DATA_DIR}/#{retrieve_file}") unless date_diff_over?(date)
+      conn.download_file("#{@remote_dir}/#{retrieve_file}", "#{@out_dir}/#{retrieve_file}") unless date_diff_over?(date)
     end
   end
 
