@@ -9,16 +9,16 @@ module Gobi
   include Logging
 
   @remote_dir = 'gobiord'
-  @out_dir = File.expand_path(File.join(__dir__, '../data'))
+  @local_dir = File.expand_path(File.join(__dir__, '../data'))
   opts = GetoptLong.new(
-    ['--out_dir', '-o', GetoptLong::REQUIRED_ARGUMENT],
+    ['--local_dir', '-o', GetoptLong::REQUIRED_ARGUMENT],
     ['--remote_dir', '-r', GetoptLong::REQUIRED_ARGUMENT]
   )
 
   opts.each do |opt, arg|
     case opt
-    when '--out_dir'
-      @out_dir = arg
+    when '--local_dir'
+      @local_dir = arg
     when '--remote_dir'
       @remote_dir = arg
     end
@@ -45,7 +45,9 @@ module Gobi
 
       logger.info "Found file #{retrieve_file} on server going to download"
       date = file.attributes.mtime
-      conn.download_file("#{@remote_dir}/#{retrieve_file}", "#{@out_dir}/#{retrieve_file}") unless date_diff_over?(date)
+      unless date_diff_over?(date)
+        conn.download_file("#{@remote_dir}/#{retrieve_file}", "#{@local_dir}/#{retrieve_file}")
+      end
     end
   end
 
