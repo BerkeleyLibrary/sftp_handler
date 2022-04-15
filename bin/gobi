@@ -1,7 +1,0 @@
-#!/usr/bin/env ruby
-
-locallib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(locallib) unless $LOAD_PATH.include?(locallib)
-require 'get_gobi'
-
-GetGobi.get_gobi
