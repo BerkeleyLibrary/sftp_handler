@@ -37,7 +37,7 @@ Standard way this should be set to run each day to look for a file if it exists
 docker run --rm gobi_sftp --local_dir '/path_to_local_dir' 
 ```
 
-Example with command line arguments
+Example if you wanted to specify a specific remote directory as well
 
 ```sh
 docker run --rm gobi_sftp ebook0312.ord --remote_dir remote_directory --local_dir '/path_to_local_dir' 
