@@ -1,10 +1,13 @@
 services:
-  gobi_sftp:
-    build: .
+  app:
+    build:
+      context: .
+      target: development
+    environment:
+      GOBI_PASS: "${GOBI_PASS}"
     image: containers.lib.berkeley.edu/lap/gobi_sftp/development:latest
     init: yes
     volumes:
-      - ./:/opt/app:rw
-      - ./secrets:/run/secrets
+      - ./:/opt/app
 
 version: "3.8"

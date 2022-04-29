@@ -1,4 +1,4 @@
 gobi:
-    host: <%= ENV['GOBI_HOST'] %> 
-    user: <%= ENV['GOBI_USER'] %>
-    password: <%= ENV['GOBI_PASS'] %>
+    host: <%= ENV.fetch('GOBI_HOST', 'ftp.ybp.com') %>
+    user: <%= ENV.fetch('GOBI_USER', 'berkeley') %>
+    password: <%= ENV.fetch('GOBI_PASS', 'p4$$w0r6') %>
