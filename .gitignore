@@ -1,14 +1,13 @@
-# Convoluted gitkeep setting to keep the data directory
-# structure intact without tracking its contents.
+# secrets file
+.env
 
 vendor
 .bundle
 
+# Convoluted gitkeep setting to keep the data directory
+# structure intact without tracking its contents.
 data/*
 !data/.keep
 
 # Build/test artifacts
 artifacts/*
-
-secrets/*
-!secrets/.keep
