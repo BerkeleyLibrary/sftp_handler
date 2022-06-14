@@ -1,6 +1,11 @@
 # secrets file
 .env
 
+# rubocop creates this
+.cache
+
+.*_history
+
 vendor
 .bundle
 

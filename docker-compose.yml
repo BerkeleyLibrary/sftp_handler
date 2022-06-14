@@ -4,7 +4,8 @@ services:
       context: .
       target: development
     environment:
-      GOBI_PASS: "${GOBI_PASS}"
+      LIT_GOBI_PASSWORD: "${LIT_GOBI_PASSWORD}"
+      LIT_LBNL_KEY_DATA: "${LIT_LBNL_KEY_DATA}"
     image: containers.lib.berkeley.edu/lap/gobi_sftp/development:latest
     init: yes
     volumes:

@@ -5,6 +5,7 @@ AllCops:
     - 'bin/**/*'
     - 'db/**/*'
     - 'out/**/*'
+    - 'spec/**/*'
 
 # Allow one line around block body (Layout/EmptyLines will still disallow two or more)
 Layout/EmptyLinesAroundBlockBody:
@@ -33,6 +34,9 @@ Lint/SuppressedException:
 # Reasonable line-length check; it's too easy for the cure to be worse than the disease
 Layout:
   Max: 150
+
+Metrics/MethodLength:
+  Max: 50
 
 # Confusing and weird
 Naming/VariableNumber:

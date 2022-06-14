@@ -36,7 +36,7 @@ USER $APP_USER
 
 # Uses the get_gobi script as the entrypoint, so any arguments passed to `docker run`
 # at invocation are passed directly to this script.
-ENTRYPOINT ["ruby","/opt/app/lib/get_gobi.rb"]
+ENTRYPOINT ["/opt/app/bin/berkeley_library-sftp_handler.rb"]
 
 # =============================================================================
 # Target: development

@@ -1,13 +1,16 @@
 source 'https://rubygems.org'
 
-gem 'colorize'
-gem 'erb'
-gem 'getoptlong'
+gem 'chronic', '~> 0.10.2'
 gem 'net-sftp'
-gem 'rspec'
-gem 'rspec_junit_formatter'
-gem 'rubocop', require: false
-gem 'rubocop-checkstyle_formatter', require: false
 gem 'thor', '~> 1.1'
-gem 'uri'
-gem 'webmock'
+
+group :test do
+  gem 'colorize'
+  gem 'rspec'
+  gem 'rspec-its', '~> 1.3'
+  gem 'rspec_junit_formatter'
+  gem 'rubocop', require: false
+  gem 'rubocop-checkstyle_formatter', require: false
+  gem 'timecop', '~> 0.9.5'
+  gem 'webmock'
+end
