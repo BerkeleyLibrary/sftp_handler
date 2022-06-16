@@ -13,7 +13,7 @@ module BerkeleyLibrary
       class Lbnl < Base
         def download!(filename: nil, local_dir: '/opt/app/data')
           filename ||= default_filename
-          remote_path = Pathname.new('/') + filename
+          remote_path = Pathname.new(filename)
           local_path = Pathname.new(local_dir) + filename
           assert_not_exists! local_path
 

@@ -10,7 +10,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
     let(:now) { Time.new(2022, 5, 25, 0, 0, 0) }
     let(:last_weeks_filename) { 'lbnl_people_20220516.zip' }
     let(:this_weeks_filename) { 'lbnl_people_20220523.zip' }
-    let(:todays_remote_path) { Pathname.new("/#{this_weeks_filename}") }
+    let(:todays_remote_path) { Pathname.new(this_weeks_filename) }
     let(:sftp_session) { instance_double(Net::SFTP::Session) }
 
     before do
@@ -44,7 +44,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
 
     it "downloads a specific file" do
       filename = 'lbnl_people_20220516.zip'
-      remote_path = Pathname.new("/#{filename}")
+      remote_path = Pathname.new(filename)
       local_path = Pathname.new("/opt/app/data/#{filename}")
 
       expect(sftp_session)
