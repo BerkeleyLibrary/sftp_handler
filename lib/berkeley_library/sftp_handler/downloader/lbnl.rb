@@ -18,7 +18,7 @@ module BerkeleyLibrary
           assert_not_exists! local_path
 
           connect do |sftp|
-            sftp.download!(remote_path, local_path)
+            sftp.download!(remote_path.to_s, local_path.to_s)
           rescue Net::SFTP::StatusException
             puts "Remote file #{remote_path} does not exist"
           end

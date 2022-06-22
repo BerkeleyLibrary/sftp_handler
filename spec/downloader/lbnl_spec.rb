@@ -27,7 +27,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
     it "downloads this week's file" do
       expect(sftp_session)
         .to receive(:download!)
-        .with(todays_remote_path, Pathname.new("/opt/app/data/#{this_weeks_filename}"))
+        .with(todays_remote_path.to_s, Pathname.new("/opt/app/data/#{this_weeks_filename}").to_s)
 
       subject.download!
     end
@@ -37,7 +37,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
 
       expect(sftp_session)
         .to receive(:download!)
-        .with(todays_remote_path, Pathname.new("#{local_dir}/#{this_weeks_filename}"))
+        .with(todays_remote_path.to_s, Pathname.new("#{local_dir}/#{this_weeks_filename}").to_s)
 
       subject.download!(local_dir: local_dir)
     end
@@ -49,7 +49,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
 
       expect(sftp_session)
         .to receive(:download!)
-        .with(remote_path, local_path)
+        .with(remote_path.to_s, local_path.to_s)
 
       subject.download!(filename: filename)
     end
