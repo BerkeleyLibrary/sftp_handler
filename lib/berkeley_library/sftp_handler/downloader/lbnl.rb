@@ -15,6 +15,7 @@ module BerkeleyLibrary
           filename ||= default_filename
           remote_path = Pathname.new(filename)
           local_path = Pathname.new(local_dir) + filename
+          assert_file_not_processed! local_path + '.old'
           assert_not_exists! local_path
 
           connect do |sftp|
