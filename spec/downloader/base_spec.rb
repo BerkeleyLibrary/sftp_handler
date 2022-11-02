@@ -9,18 +9,6 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Base do
     end
   end
 
-  describe '#assert_file_not_processed!' do
-    it 'proceeds if processed file is absent' do
-      expect { subject.assert_file_not_processed! '/path/to/non-existent-file' }.not_to raise_error
-    end
-
-    it 'raises if processed file exists' do
-      Tempfile.open do |f|
-        expect { subject.assert_file_not_processed! f.path }.to raise_error RuntimeError
-      end
-    end
-  end
-
   describe '#assert_not_exists!' do
     it 'proceeds if file is absent' do
       expect { subject.assert_not_exists! '/path/to/non-existent-file' }.not_to raise_error

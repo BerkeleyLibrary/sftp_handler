@@ -1,6 +1,7 @@
 require 'berkeley_library/sftp_handler/downloader/lbnl'
 require 'net/sftp'
 require 'spec_helper'
+require 'tempfile'
 
 describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
   its(:default_host) { is_expected.to eq 'ncc-1701.lbl.gov' }
@@ -52,6 +53,17 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
         .with(remote_path.to_s, local_path.to_s)
 
       subject.download!(filename: filename)
+    end
+  end
+
+  describe '#assert_file_not_processed!' do
+    it 'proceeds if processed file is absent' do
+      expect { subject.assert_file_not_processed!('/path/to/non-existent-file') }.not_to raise_error
+    end
+
+    it 'raises if processed file exists' do
+      f = Tempfile.new(['temp_file38348', '.old'])
+      expect { subject.assert_file_not_processed! f.path.gsub('.old', '') }.to raise_error RuntimeError
     end
   end
 

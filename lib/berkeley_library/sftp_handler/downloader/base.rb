@@ -41,11 +41,6 @@ module BerkeleyLibrary
           end
         end
 
-        def assert_file_not_processed!(processed_path)
-          raise "File was already processed: #{processed_path}" \
-            if Pathname.new(processed_path).exist?
-        end
-
         def assert_not_exists!(local_path)
           raise "Local file already exists: #{local_path}" \
             if Pathname.new(local_path).exist?
