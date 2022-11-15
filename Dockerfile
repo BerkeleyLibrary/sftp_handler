@@ -69,7 +69,7 @@ RUN gem install bundler --version 2.2.33
 
 # Install gems. We don't enforce the validity of the Gemfile.lock until the
 # final (production) stage.
-COPY --chown=$APP_USER:$APP_USER Gemfile* ./
+COPY --chown=$APP_USER:$APP_USER Gemfile* .ruby-version ./
 RUN bundle install
 
 # Copy the rest of the codebase. We do this after bundle-install so that

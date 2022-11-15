@@ -4,6 +4,7 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
+    berkeley_library-docker (0.1.1)
     chronic (0.10.2)
     colorize (0.8.1)
     crack (0.4.5)
@@ -61,9 +62,11 @@ GEM
       hashdiff (>= 0.4.0, < 2.0.0)
 
 PLATFORMS
+  x86_64-darwin-19
   x86_64-linux
 
 DEPENDENCIES
+  berkeley_library-docker (~> 0.1.1)
   chronic (~> 0.10.2)
   colorize
   net-sftp
@@ -75,6 +78,9 @@ DEPENDENCIES
   thor (~> 1.1)
   timecop (~> 0.9.5)
   webmock
+
+RUBY VERSION
+   ruby 3.0.3p157
 
 BUNDLED WITH
    2.2.32
