@@ -3,6 +3,7 @@ require 'net/sftp'
 require 'spec_helper'
 require 'tempfile'
 
+# rubocop:disable Metrics/BlockLength
 describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
   its(:default_host) { is_expected.to eq 'ncc-1701.lbl.gov' }
   its(:default_username) { is_expected.to eq 'ucblib' }
@@ -25,7 +26,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
       Timecop.unfreeze
     end
 
-    it "downloads this week's file" do
+    it 'downloads this week\'s file' do
       expect(sftp_session)
         .to receive(:download!)
         .with(todays_remote_path.to_s, Pathname.new("/opt/app/data/#{this_weeks_filename}").to_s)
@@ -33,7 +34,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
       subject.download!
     end
 
-    it "downloads to an alternate local_dir" do
+    it 'downloads to an alternate local_dir' do
       local_dir = '/netapp/alma/lbnl_patrons'
 
       expect(sftp_session)
@@ -43,7 +44,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
       subject.download!(local_dir: local_dir)
     end
 
-    it "downloads a specific file" do
+    it 'downloads a specific file' do
       filename = 'lbnl_people_20220516.zip'
       remote_path = Pathname.new(filename)
       local_path = Pathname.new("/opt/app/data/#{filename}")
@@ -56,14 +57,19 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
     end
   end
 
-  describe '#assert_file_not_processed!' do
-    it 'proceeds if processed file is absent' do
-      expect { subject.assert_file_not_processed!('/path/to/non-existent-file') }.not_to raise_error
+  describe '#file_retrieved?' do
+    it 'returns false if file was already retrieved or processed' do
+      expect(subject.file_retrieved?('/path/to/non-existent-file')).to be(false)
     end
 
-    it 'raises if processed file exists' do
-      f = Tempfile.new(['temp_file38348', '.old'])
-      expect { subject.assert_file_not_processed! f.path.gsub('.old', '') }.to raise_error RuntimeError
+    it 'returns true if file was already retrieved' do
+      f = Tempfile.new('temp_file38348')
+      expect(subject.file_retrieved?(f)).to be(true)
+    end
+
+    it 'returns true if file was already processed' do
+      f = Tempfile.new('temp_file38348.old')
+      expect(subject.file_retrieved?(f)).to be(true)
     end
   end
 
@@ -101,3 +107,4 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
