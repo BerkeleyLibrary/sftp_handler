@@ -35,11 +35,11 @@ module BerkeleyLibrary
         end
 
         def default_username
-          'ucblib'
+          ENV['LIT_LBNL_USERNAME'] 
         end
 
         def default_filename
-          @default_filename ||= "lbnl_people_#{most_recent_monday.strftime('%Y%m%d')}.zip"
+          @default_filename ||= "#{ENV['LBNL_FILENAME']}_#{most_recent_monday.strftime('%Y%m%d')}.zip"
         end
 
         def most_recent_monday
