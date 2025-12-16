@@ -6,7 +6,6 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Gobi do
   let(:now) { Time.new(2022, 5, 20, 0, 0, 0) }
 
   its(:default_host) { is_expected.to eq 'ftp.ybp.com' }
-  its(:default_username) { is_expected.to eq 'berkeley' }
   its(:ssh_options) { is_expected.to include(append_all_supported_algorithms: true) }
 
   its(:default_filename) do

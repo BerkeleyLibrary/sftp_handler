@@ -6,7 +6,6 @@ require 'tempfile'
 # rubocop:disable Metrics/BlockLength
 describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
   its(:default_host) { is_expected.to eq 'ncc-1701.lbl.gov' }
-  its(:default_username) { is_expected.to eq 'ucblib' }
 
   describe '#download!' do
     let(:now) { Time.new(2022, 5, 25, 0, 0, 0) }
