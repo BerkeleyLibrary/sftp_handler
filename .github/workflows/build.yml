@@ -81,7 +81,9 @@ jobs:
       DOCKER_APP_IMAGE_ARM64: ${{ needs.build.outputs.image-arm64 }}
       DOCKER_APP_IMAGE_X64: ${{ needs.build.outputs.image-x64 }}
     outputs:
-      image: ${{ steps.meta.outputs.tags }}
+      build-image: ${{ steps.meta.outputs.tags }}
+      build-image-arm: ${{ needs.build.outputs.build-image-arm }}
+      build-image-x64: ${{ needs.build.outputs.build-image-x64 }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -115,7 +117,7 @@ jobs:
       - merge
     env:
       COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
-      DOCKER_APP_IMAGE: ${{ needs.merge.outputs.image }}
+      DOCKER_APP_IMAGE: ${{ needs.merge.outputs.build-image }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -168,7 +170,7 @@ jobs:
       - merge
       - test
     env:
-      DOCKER_APP_IMAGE: ${{ needs.merge.outputs.image }}
+      DOCKER_APP_IMAGE: ${{ needs.merge.outputs.build-image }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
