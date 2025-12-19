@@ -113,7 +113,6 @@ jobs:
     runs-on: ubuntu-24.04
     needs: 
       - merge
-      - test
     env:
       COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
       DOCKER_APP_IMAGE: ${{ needs.merge.outputs.image }}
