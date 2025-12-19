@@ -5,7 +5,7 @@ require 'pathname'
 module BerkeleyLibrary
   module SftpHandler
     module Downloader
-      # Downloads the latest lbnl_people_yyyymmdd.zip patron file.
+      # Downloads the latest ${LBNL_FILENAME}_yyyymmdd.zip patron file.
       #
       # LBNL seems to populate this every Monday, so by default the class looks for the file
       # that would've been added on the most recent Monday. If today is Monday, it uses today's
@@ -35,7 +35,7 @@ module BerkeleyLibrary
         end
 
         def default_username
-          ENV['LIT_LBNL_USERNAME'] 
+          ENV['LIT_LBNL_USERNAME']
         end
 
         def default_filename
