@@ -20,9 +20,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner:
-          - ubuntu-24.04
-          - ubuntu-24.04-arm
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-24.04-arm
+          - platform: linux/arm64 
+            runner: ubuntu-24.04-arm 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -61,6 +63,7 @@ jobs:
         name: Build/push the arch-specific image
         uses: docker/build-push-action@v6
         with:
+          platforms: ${{ matrix.platform }}
           cache-from: type=registry,ref=${{ steps.cache-meta.outputs.tags }}
           cache-to: type=registry,ref=${{ steps.cache-meta.outputs.tags }},mode=max
           labels: ${{ steps.build-meta.outputs.labels }}
