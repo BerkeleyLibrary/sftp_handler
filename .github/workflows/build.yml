@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - '**'
+  workflow_call:
   workflow_dispatch:
 
 env:
@@ -110,7 +111,9 @@ jobs:
 
   test:
     runs-on: ubuntu-24.04
-    needs: merge
+    needs: 
+      - merge
+      - test
     env:
       COMPOSE_FILE: docker-compose.yml:docker-compose.ci.yml
       DOCKER_APP_IMAGE: ${{ needs.merge.outputs.image }}
@@ -164,7 +167,7 @@ jobs:
     runs-on: ubuntu-24.04
     needs:
       - merge
-      # - test
+      - test
     env:
       DOCKER_APP_IMAGE: ${{ needs.merge.outputs.image }}
     steps:
@@ -189,6 +192,5 @@ jobs:
 
       - name: Retag and push the image
         run: |
-          docker pull "$DOCKER_APP_IMAGE"
-          echo "$DOCKER_METADATA_OUTPUT_TAGS" | tr ' ' '\n' | xargs -n1 docker tag "$DOCKER_APP_IMAGE"
-          docker push --all-tags "$(echo "$DOCKER_APP_IMAGE" | cut -f1 -d:)"
+          docker buildx imagetools create \
+            $(jq -cr '.tags | map("--tag " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") $DOCKER_APP_IMAGE_ARM64 $DOCKER_APP_IMAGE_X64
