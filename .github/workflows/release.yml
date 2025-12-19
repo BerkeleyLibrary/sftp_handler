@@ -38,7 +38,7 @@ jobs:
         env:
           BASE_IMAGE: ${{ steps.get-base-image.outputs.tags }}
         run: |
-          docker pull "$BASE_IMAGE"
+          docker manifest inspect "$BASE_IMAGE"
 
       - name: Produce release tags
         id: tag-meta
