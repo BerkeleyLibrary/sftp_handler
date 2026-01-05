@@ -1,0 +1,13 @@
+services:
+  app:
+    build: !reset
+    image: ${DOCKER_APP_IMAGE}
+    environment: !override
+      LBNL_FILENAME: "test" 
+    entrypoint: ["tail", "-f", "/dev/null"] 
+    volumes: !override
+      - artifacts:/opt/app/artifacts
+
+volumes:
+  artifacts:
+

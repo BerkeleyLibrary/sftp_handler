@@ -9,8 +9,8 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
 
   describe '#download!' do
     let(:now) { Time.new(2022, 5, 25, 0, 0, 0) }
-    let(:last_weeks_filename) { 'lbnl_people_20220516.zip' }
-    let(:this_weeks_filename) { 'lbnl_people_20220523.zip' }
+    let(:last_weeks_filename) { 'test_20220516.zip' }
+    let(:this_weeks_filename) { 'test_20220523.zip' }
     let(:todays_remote_path) { Pathname.new(this_weeks_filename) }
     let(:sftp_session) { instance_double(Net::SFTP::Session) }
 
@@ -44,7 +44,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
     end
 
     it 'downloads a specific file' do
-      filename = 'lbnl_people_20220516.zip'
+      filename = 'test_20220516.zip'
       remote_path = Pathname.new(filename)
       local_path = Pathname.new("/opt/app/data/#{filename}")
 
@@ -76,7 +76,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
     context 'on Sunday May 29, 2022' do
       its(:default_filename) do
         Timecop.freeze(Time.new(2022, 5, 29, 23, 59, 59)) do
-          is_expected.to eq 'lbnl_people_20220523.zip'
+          is_expected.to eq 'test_20220523.zip'
         end
       end
     end
@@ -84,7 +84,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
     context 'on Monday May 30, 2022' do
       its(:default_filename) do
         Timecop.freeze(Time.new(2022, 5, 30, 23, 59, 59)) do
-          is_expected.to eq 'lbnl_people_20220530.zip'
+          is_expected.to eq 'test_20220530.zip'
         end
       end
     end
@@ -92,7 +92,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
     context 'on Tuesday May 31, 2022' do
       its(:default_filename) do
         Timecop.freeze(Time.new(2022, 5, 31, 0, 0, 0)) do
-          is_expected.to eq 'lbnl_people_20220530.zip'
+          is_expected.to eq 'test_20220530.zip'
         end
       end
     end
@@ -100,7 +100,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
     context 'on Wednesday May 25, 2022' do
       its(:default_filename) do
         Timecop.freeze(Time.new(2022, 5, 25, 23, 59, 59)) do
-          is_expected.to eq 'lbnl_people_20220523.zip'
+          is_expected.to eq 'test_20220523.zip'
         end
       end
     end
