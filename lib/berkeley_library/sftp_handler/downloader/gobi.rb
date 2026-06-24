@@ -43,7 +43,7 @@ module BerkeleyLibrary
         end
 
         def default_username
-          ENV['LIT_GOBI_USERNAME']
+          ENV.fetch('LIT_GOBI_USERNAME', nil)
         end
 
         def ssh_options

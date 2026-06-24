@@ -35,11 +35,11 @@ module BerkeleyLibrary
         end
 
         def default_username
-          ENV['LIT_LBNL_USERNAME']
+          ENV.fetch('LIT_LBNL_USERNAME', nil)
         end
 
         def default_filename
-          @default_filename ||= "#{ENV['LBNL_FILENAME']}_#{most_recent_monday.strftime('%Y%m%d')}.zip"
+          @default_filename ||= "#{ENV.fetch('LBNL_FILENAME', nil)}_#{most_recent_monday.strftime('%Y%m%d')}.zip"
         end
 
         def most_recent_monday

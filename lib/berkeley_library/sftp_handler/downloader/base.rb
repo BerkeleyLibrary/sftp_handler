@@ -28,9 +28,9 @@ module BerkeleyLibrary
           @key_data = key_data.is_a?(Array) ? key_data : [key_data].compact
         end
 
-        def connect(&block)
+        def connect(&)
           puts "Connecting to sftp://#{@username}@#{@host}"
-          Net::SFTP.start(@host, @username, ssh_options, sftp_options, &block)
+          Net::SFTP.start(@host, @username, ssh_options, sftp_options, &)
         end
 
         def ssh_options
@@ -53,7 +53,7 @@ module BerkeleyLibrary
         # Helper method for pulling default initializer values from the environment
         def default_for(option, fallback = nil)
           envvar = "#{config_prefix}#{option.to_s.upcase}"
-          getter = "default_#{option}".to_sym
+          getter = :"default_#{option}"
           ENV.fetch(envvar, respond_to?(getter) ? send(getter) : fallback)
         end
 

@@ -4,7 +4,7 @@
 # The base stage scaffolds elements which are common to building and running
 # the application, such as installing ca-certificates, creating the app user,
 # and installing runtime system dependencies.
-FROM ruby:3.0.3-slim AS base
+FROM ruby:3.3-slim AS base
 
 # ------------------------------------------------------------
 # Create the application user/group and installation directory
