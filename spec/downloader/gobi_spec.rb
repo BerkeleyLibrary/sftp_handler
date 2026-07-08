@@ -6,7 +6,7 @@ describe BerkeleyLibrary::SftpHandler::Downloader::Gobi do
   let(:now) { Time.new(2022, 5, 20, 0, 0, 0) }
 
   its(:default_host) { is_expected.to eq 'ftp.ybp.com' }
-  its(:ssh_options) { is_expected.to include(append_all_supported_algorithms: true) }
+  its(:ssh_options) { is_expected.not_to include(:append_all_supported_algorithms) }
 
   its(:default_filename) do
     Timecop.freeze(now) do

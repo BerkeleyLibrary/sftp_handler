@@ -4,7 +4,9 @@ GEM
     addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     ast (2.4.3)
+    base64 (0.3.0)
     berkeley_library-docker (0.1.1)
+    bigdecimal (4.1.2)
     chronic (0.10.2)
     colorize (0.8.1)
     crack (0.4.5)
@@ -14,9 +16,10 @@ GEM
     json (2.20.0)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
-    net-sftp (3.0.0)
-      net-ssh (>= 5.0.0, < 7.0.0)
-    net-ssh (6.1.0)
+    logger (1.7.0)
+    net-sftp (4.0.0)
+      net-ssh (>= 5.0.0, < 8.0.0)
+    net-ssh (7.3.3)
     parallel (2.1.0)
     parser (3.3.11.1)
       ast (~> 2.4.1)
@@ -79,9 +82,12 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  base64
   berkeley_library-docker (~> 0.1.1)
+  bigdecimal
   chronic (~> 0.10.2)
   colorize
+  logger
   net-sftp
   rspec
   rspec-its (~> 1.3)

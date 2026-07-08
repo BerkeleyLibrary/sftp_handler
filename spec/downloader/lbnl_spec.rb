@@ -5,6 +5,14 @@ require 'tempfile'
 
 # rubocop:disable Metrics/BlockLength
 describe BerkeleyLibrary::SftpHandler::Downloader::Lbnl do
+  around do |example|
+    old_lbnl_filename = ENV.fetch('LBNL_FILENAME', nil)
+    ENV['LBNL_FILENAME'] = 'test'
+    example.run
+  ensure
+    old_lbnl_filename.nil? ? ENV.delete('LBNL_FILENAME') : ENV['LBNL_FILENAME'] = old_lbnl_filename
+  end
+
   its(:default_host) { is_expected.to eq 'ncc-1701.lbl.gov' }
 
   describe '#download!' do
