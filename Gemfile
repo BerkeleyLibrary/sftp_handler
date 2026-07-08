@@ -4,10 +4,13 @@ ruby File.read('.ruby-version').strip
 
 gem 'berkeley_library-docker', '~> 0.1.1'
 gem 'chronic', '~> 0.10.2'
+gem 'logger'
 gem 'net-sftp'
 gem 'thor', '~> 1.1'
 
 group :test do
+  gem 'base64'
+  gem 'bigdecimal'
   gem 'colorize'
   gem 'rspec'
   gem 'rspec-its', '~> 1.3'

@@ -45,17 +45,6 @@ module BerkeleyLibrary
         def default_username
           ENV.fetch('LIT_GOBI_USERNAME', nil)
         end
-
-        def ssh_options
-          super.tap do |opts|
-            # @note As of 04/28/22, Gobi's server only supports outdated Diffie-Hellman
-            #       key exchange algorithms, which you local sftp client will probably (and
-            #       correctly) refuse. If you want to test manually, then for now you must
-            #       explicitly allow the old algorithm by passing the following option to your
-            #       sftp client: `-oKexAlgorithms=+diffie-hellman-group1-sha1`.
-            opts[:append_all_supported_algorithms] = true
-          end
-        end
       end
     end
   end
